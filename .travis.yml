@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+ - docker build -t bevolta/ember-alpine .
+ - docker images -a
+ - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+
+after_success:
+ - docker push bevolta/ember-alpine:latest
