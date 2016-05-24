@@ -13,20 +13,14 @@ ENV LANG en_US.utf8
 RUN apk add  --update bash ruby ruby-dev
 
 # Install sass and compass gems
-#RUN gem install compass --no-ri --no-rdoc
-#RUN	gem install --pre sass-css-importer
-
+# install compass --no-ri --no-rdoc --pre sass-css-importer
 RUN \
 apk add --update \
     ruby \
     libffi-dev \
     build-base
-
-
 RUN gem sources --add https://rubygems.org/
-
 RUN gem update --no-rdoc --no-ri
-
 RUN gem install \
 		compass --no-ri --no-rdoc \
     listen \
@@ -53,7 +47,7 @@ apk del git build-base &&\
 apk add libstdc++
 
 
-# Note: npm is v2.14.7
+# ember-cli, bower and phantomjs
 RUN npm install -g ember-cli@$EMBER_CLI_VERSION
 RUN npm install -g bower@$BOWER_VERSION
 RUN npm install -g phantomjs@$PHANTOMJS_VERSION
