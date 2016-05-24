@@ -1,0 +1,65 @@
+FROM mhart/alpine-node:4
+MAINTAINER Earvin Kayonga <e.kayonga@bevolta.com>
+
+ENV EMBER_CLI_VERSION 2.4.1
+ENV BOWER_VERSION 1.7.1
+ENV PHANTOMJS_VERSION 1.9.19
+ENV WATCHMAN_VERSION 3.5.0
+
+
+ENV LANG en_US.utf8
+
+# Install ruby & ruby-dev
+RUN apk add  --update bash ruby ruby-dev
+
+# Install sass and compass gems
+#RUN gem install compass --no-ri --no-rdoc
+#RUN	gem install --pre sass-css-importer
+
+RUN \
+apk add --update \
+    ruby \
+    libffi-dev \
+    build-base
+
+
+RUN gem sources --add https://rubygems.org/
+
+RUN gem update --no-rdoc --no-ri
+
+RUN gem install \
+		compass --no-ri --no-rdoc \
+    listen \
+		ffi \
+		--pre sass-css-importer \
+    compass &&\
+
+rm -rf /var/cache/apk/*
+
+RUN \
+apk --update add git build-base &&\
+git clone https://github.com/sass/sassc &&\
+cd sassc &&\
+git clone https://github.com/sass/libsass &&\
+SASS_LIBSASS_PATH=/sassc/libsass make &&\
+
+# install
+mv bin/sassc /usr/bin/sass &&\
+
+# cleanup
+cd / &&\
+rm -rf /sassc &&\
+apk del git build-base &&\
+apk add libstdc++
+
+
+# Note: npm is v2.14.7
+RUN npm install -g ember-cli@$EMBER_CLI_VERSION
+RUN npm install -g bower@$BOWER_VERSION
+RUN npm install -g phantomjs@$PHANTOMJS_VERSION
+
+
+# run ember server on container start
+EXPOSE 4200 49152
+ENTRYPOINT ["/usr/bin/ember"]
+CMD ["serve","--live-reload=false"]
