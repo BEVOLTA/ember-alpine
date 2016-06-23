@@ -10,7 +10,7 @@ ENV WATCHMAN_VERSION 3.5.0
 ENV LANG en_US.utf8
 
 # Install ruby & ruby-dev
-RUN apk add  --update bash ruby ruby-dev
+RUN apk add  --update bash ruby ruby-dev git
 
 # Install sass and compass gems
 # install compass --no-ri --no-rdoc --pre sass-css-importer
