@@ -50,7 +50,6 @@ apk add libstdc++
 RUN npm install -g ember-cli@$EMBER_CLI_VERSION
 RUN npm install -g bower@$BOWER_VERSION
 RUN npm install -g phantomjs@$PHANTOMJS_VERSION
-RUN npm install node-sass@3.80
 
 # run ember server on container start
 EXPOSE 4200 49152
