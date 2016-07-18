@@ -10,7 +10,7 @@ ENV WATCHMAN_VERSION 3.5.0
 ENV LANG en_US.utf8
 
 # Install ruby & ruby-dev
-RUN apk add  --update bash ruby ruby-dev git
+RUN apk add  --update bash ruby ruby-dev git python
 
 # Install sass and compass gems
 # install compass --no-ri --no-rdoc --pre sass-css-importer
@@ -49,7 +49,7 @@ apk add libstdc++
 # ember-cli, bower and phantomjs
 RUN npm install -g ember-cli@$EMBER_CLI_VERSION
 RUN npm install -g bower@$BOWER_VERSION
-RUN npm install -g phantomjs@$PHANTOMJS_VERSION
+#RUN npm install -g phantomjs@$PHANTOMJS_VERSION
 
 # run ember server on container start
 EXPOSE 4200 49152
