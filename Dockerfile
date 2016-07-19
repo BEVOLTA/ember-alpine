@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:4
+FROM mhart/alpine-node:6.3
 MAINTAINER Earvin Kayonga <e.kayonga@bevolta.com>
 
 ENV EMBER_CLI_VERSION 2.4.1
@@ -49,6 +49,7 @@ apk add libstdc++
 # ember-cli, bower and phantomjs
 RUN npm install -g ember-cli@$EMBER_CLI_VERSION
 RUN npm install -g bower@$BOWER_VERSION
+RUN npm install -g node-sass
 #RUN npm install -g phantomjs@$PHANTOMJS_VERSION
 
 # run ember server on container start
